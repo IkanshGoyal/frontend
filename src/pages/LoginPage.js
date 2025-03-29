@@ -30,7 +30,7 @@ const LoginPage = () => {
   
       showSuccess('Logged in successfully');
   
-      const response = await fetch('http://localhost:5050/api/auth/me', {
+      const response = await fetch('/api/auth/me', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email }),

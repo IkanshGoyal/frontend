@@ -66,7 +66,7 @@ const SignupPage = () => {
 
       // Register user in the backend
       await axios.post(
-        "http://localhost:5050/api/auth/register",
+        "/api/auth/register",
         {
           uid: user.uid,
           name: formData.name,
