@@ -1,0 +1,28 @@
+/* frontend/src/NotFoundPage.css */
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;
+  }
+  
+  .not-found-container h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .home-link {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 2rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .home-link:hover {
+    transform: translateY(-2px);
+  }

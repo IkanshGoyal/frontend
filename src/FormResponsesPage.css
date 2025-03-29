@@ -1,0 +1,30 @@
+/* frontend/src/FormResponsesPage.css */
+.responses-page {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .export-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+  }
+  
+  .response-card {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+  
+  .response-data {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }

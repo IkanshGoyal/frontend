@@ -1,0 +1,104 @@
+/* frontend/src/LandingPage.css */
+.landing-page {
+    min-height: 100vh;
+  }
+  
+  .hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .primary-btn {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  
+  .primary-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .secondary-btn {
+    background: var(--card);
+    color: var(--text);
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  
+  .scroll-down {
+    position: absolute;
+    bottom: 2rem;
+    animation: bounce 2s infinite;
+  }
+  
+  .features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    background: var(--card);
+  }
+  
+  .feature-card {
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: transform 0.2s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .testimonials-section {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .testimonial {
+    background: var(--card);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px var(--shadow);
+  }
+  
+  .landing-footer {
+    padding: 2rem;
+    text-align: center;
+    background: var(--card);
+    margin-top: 4rem;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
