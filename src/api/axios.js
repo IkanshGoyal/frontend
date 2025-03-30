@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getCookie } from '../utils/cookies';
 
 const apiClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5050/api",
+  baseURL: process.env.REACT_APP_API_URL || "https://dataflow-xi.vercel.app",
   headers: {
     'Content-Type': 'application/json',
   },

@@ -33,47 +33,32 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserId = async () => {
-      try {
-        const email = localStorage.getItem("userEmail");
-        if (!email) return;
-
-        const response = await axios.post("/api/auth/me", { email });
-        localStorage.setItem("userId", response.data._id); 
-        setUser(response.data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    };
-
-    fetchUserId();
-  }, []);
-
-
-  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
+        console.log("User detected:", firebaseUser);
+        
+        await new Promise(resolve => setTimeout(resolve, 1000)); 
+  
         try {
-          console.log("User detected:", firebaseUser);
-
-          // Fetch user data based on email instead of token
-          const response = await axios.post("/auth/me", {
+          const response = await axios.post("/api/auth/me", {
             email: firebaseUser.email,
           });
-
-          console.log("User data received:", response.data);
           setUser(response.data);
+          localStorage.setItem("userEmail", firebaseUser.email);
         } catch (error) {
-          console.error("Error fetching user data:", error.message);
-          setUser(null);
+          if (error.response && error.response.status === 404) {
+            console.warn("User not found in the database. Redirecting...");
+            setUser(null);
+          } else {
+            console.error("Error fetching user data:", error);
+          }
         }
       } else {
-        console.log("No user detected.");
         setUser(null);
       }
       setLoading(false);
     });
-
+  
     return () => unsubscribe();
   }, []);
 

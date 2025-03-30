@@ -38,35 +38,29 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     if (formData.password !== formData.confirmPassword) {
-      return showError("Passwords do not match.");
+      showError("Passwords do not match.");
+      return;
     }
-
+  
     setLoading(true);
-
+  
     try {
-      // Create user in Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-
+      // Firebase Signup
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
       const user = userCredential.user;
-      console.log("User created:", user.uid);
-
-      // Update Firebase Profile
+  
+      // Update Display Name in Firebase
       await updateProfile(user, { displayName: formData.name });
-
-      console.log("Registering user with backend:", {
-        uid: user.uid,
-        name: formData.name,
-        email: user.email,
-      });
-
-      // Register user in the backend
-      await axios.post(
-        "/api/auth/register",
+  
+      // Store Firebase User in LocalStorage
+      localStorage.setItem("firebaseUid", user.uid);
+      localStorage.setItem("email", user.email);
+  
+      // Register User in Backend
+      const backendResponse = await axios.post(
+        "https://dataflow-xi.vercel.app/api/auth/register",
         {
           uid: user.uid,
           name: formData.name,
@@ -74,17 +68,26 @@ const SignupPage = () => {
         },
         { headers: { "Content-Type": "application/json" } }
       );
-
+  
+      // Fetch User Data from Backend after Registration
+      const meResponse = await axios.post(
+        "https://dataflow-xi.vercel.app/api/auth/me",
+        { email: user.email },
+        { headers: { "Content-Type": "application/json" } }
+      );
+  
+      localStorage.setItem("user", JSON.stringify(meResponse.data));
+  
       showSuccess("Account created successfully!");
-
-      // Wait for Firebase Auth state to update before redirecting
+  
+      // Ensure Auth State is Updated
       onAuthStateChanged(auth, (currentUser) => {
         if (currentUser) {
           console.log("Auth state updated, navigating to dashboard...");
           navigate("/dashboard");
         }
       });
-
+  
     } catch (error) {
       console.error("Signup failed:", error.response?.data || error.message);
       showError(error.response?.data?.message || "Signup failed. Try again.");

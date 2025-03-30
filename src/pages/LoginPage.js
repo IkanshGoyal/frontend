@@ -23,23 +23,20 @@ const LoginPage = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       const user = userCredential.user;
-  
-      // ✅ Store auth data in localStorage
+
       localStorage.setItem('firebaseUid', user.uid);
       localStorage.setItem('email', user.email);
   
       showSuccess('Logged in successfully');
   
-      const response = await fetch('/api/auth/me', {
+      const response = await fetch('https://dataflow-xi.vercel.app/api/auth/me', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email }),
       });
   
       const data = await response.json();
-      console.log('User Data:', data); // Debugging
   
-      // ✅ Store user data in localStorage to persist login
       localStorage.setItem('user', JSON.stringify(data));
   
       setTimeout(() => {

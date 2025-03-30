@@ -97,16 +97,6 @@ const Navbar = ({ user }) => {
         exit={{ opacity: 0, x: "100%" }}
         transition={{ type: "spring", stiffness: 200 }}
       >
-        {user && (
-          <>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/team/create">Create Team</Link>
-            </li>
-          </>
-        )}
         <li>
           <div className="theme-toggle">
             <ToggleContainer theme={theme} onClick={toggleTheme}>
